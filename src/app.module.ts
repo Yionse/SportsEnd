@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import * as dotenv from 'dotenv';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Address } from './entities/Address.entities';
@@ -10,6 +10,9 @@ import { ProductsComment } from './entities/ProductsComment.entities';
 import { Property } from './entities/Property.entities';
 import { TwoCategory } from './entities/TwoCategory.entities';
 import { User } from './entities/Users.entities';
+import { ResponseMiddleware } from './Middleware/Response.middleware';
+import { UserController } from './controllers/user.controller';
+import { UserServices } from './services/user.service';
 
 dotenv.config();
 @Module({
@@ -33,8 +36,23 @@ dotenv.config();
         User,
       ],
     }),
+    TypeOrmModule.forFeature([
+      Address,
+      Cart,
+      OneCategory,
+      Order,
+      Product,
+      ProductsComment,
+      Property,
+      TwoCategory,
+      User,
+    ]),
   ],
-  controllers: [],
-  providers: [],
+  controllers: [UserController],
+  providers: [UserServices],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(ResponseMiddleware).forRoutes('/');
+  }
+}
