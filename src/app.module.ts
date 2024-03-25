@@ -13,6 +13,9 @@ import { User } from './entities/Users.entities';
 import { ResponseMiddleware } from './Middleware/Response.middleware';
 import { UserController } from './controllers/user.controller';
 import { UserServices } from './services/user.service';
+import { CateGoryController } from './controllers/category.controller';
+import { CategoryService } from './services/category.service';
+import { ProductService } from './services/products.service';
 
 dotenv.config();
 @Module({
@@ -48,8 +51,8 @@ dotenv.config();
       User,
     ]),
   ],
-  controllers: [UserController],
-  providers: [UserServices],
+  controllers: [UserController, CateGoryController],
+  providers: [UserServices, CategoryService, ProductService],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

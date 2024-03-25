@@ -2,12 +2,12 @@
 
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('products')
 export class Product {
   @PrimaryGeneratedColumn()
   productID: number;
 
-  @Column({ length: 100, nullable: false, default: '' })
+  @Column({ length: 200, nullable: false, default: '' })
   productName: string;
 
   @Column({ length: 200, nullable: false, default: '' })
@@ -28,7 +28,7 @@ export class Product {
   @Column({ nullable: false, comment: '二级分类' })
   twoCategoryId: number;
 
-  @Column({ length: 30, nullable: false, default: '' })
+  @Column({ length: 200, nullable: false, default: '' })
   url: string;
 
   @Column({ length: 30, nullable: false, default: '', comment: '属性列表' })
