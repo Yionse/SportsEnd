@@ -16,6 +16,8 @@ import { UserServices } from './services/user.service';
 import { CateGoryController } from './controllers/category.controller';
 import { CategoryService } from './services/category.service';
 import { ProductService } from './services/products.service';
+import { ProductController } from './controllers/products.controller';
+import { PropertyService } from './services/property.service';
 
 dotenv.config();
 @Module({
@@ -51,8 +53,14 @@ dotenv.config();
       User,
     ]),
   ],
-  controllers: [UserController, CateGoryController],
-  providers: [UserServices, CategoryService, ProductService],
+  controllers: [UserController, CateGoryController, ProductController],
+  providers: [
+    UserServices,
+    CategoryService,
+    ProductService,
+    ProductService,
+    PropertyService,
+  ],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
