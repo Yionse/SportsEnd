@@ -18,6 +18,11 @@ import { CategoryService } from './services/category.service';
 import { ProductService } from './services/products.service';
 import { ProductController } from './controllers/products.controller';
 import { PropertyService } from './services/property.service';
+import { CartService } from './services/carts.service';
+import { AddressController } from './controllers/address.controller';
+import { AddressService } from './services/address.service';
+import { OrderController } from './controllers/orders.controller';
+import { OrderService } from './services/order.service';
 
 dotenv.config();
 @Module({
@@ -53,13 +58,22 @@ dotenv.config();
       User,
     ]),
   ],
-  controllers: [UserController, CateGoryController, ProductController],
+  controllers: [
+    UserController,
+    CateGoryController,
+    ProductController,
+    AddressController,
+    OrderController,
+  ],
   providers: [
     UserServices,
     CategoryService,
     ProductService,
     ProductService,
     PropertyService,
+    CartService,
+    AddressService,
+    OrderService,
   ],
 })
 export class AppModule {

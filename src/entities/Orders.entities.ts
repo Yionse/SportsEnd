@@ -2,18 +2,18 @@
 
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('orders')
 export class Order {
   @PrimaryGeneratedColumn()
   orderId: number;
 
-  @Column({ length: 1000, nullable: false, default: '' })
+  @Column({ length: 2000, nullable: false, default: '' })
   products: string;
 
   @Column({
     type: 'tinyint',
     nullable: false,
-    comment: '1-支付成功 0-待支付 -1退款中 -2退款成功 -3换货',
+    comment: '1-支付成功 -1退款中 -2退款成功 -3换货',
   })
   status: number;
 
@@ -25,4 +25,10 @@ export class Order {
 
   @Column({ length: 13, nullable: false, default: '' })
   createTime: string;
+
+  @Column({ nullable: false })
+  allPrice: number;
+
+  @Column({ nullable: false })
+  allCount: number;
 }

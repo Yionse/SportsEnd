@@ -12,4 +12,10 @@ export class Address {
 
   @Column({ nullable: false })
   userId: number;
+
+  @Column({ nullable: false })
+  name: string;
+
+  @Column({ nullable: false })
+  phoneNumber: number;
 }

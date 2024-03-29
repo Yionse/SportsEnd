@@ -1,0 +1,35 @@
+import { Address } from '@/entities/Address.entities';
+import { AddressService } from '@/services/address.service';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Post,
+  Query,
+  Res,
+} from '@nestjs/common';
+import { Response } from 'express';
+
+@Controller('/address')
+export class AddressController {
+  constructor(private readonly addressService: AddressService) {}
+
+  @Get('/list')
+  async getAddressList(
+    @Query() { userId }: { userId: number },
+    @Res() res: Response,
+  ) {
+    res.customerSend(
+      '查询收货地址成功',
+      HttpStatus.OK,
+      await this.addressService.getAddressList(userId),
+    );
+  }
+
+  @Post('/add')
+  async addAddress(@Body() address: Address, @Res() res: Response) {
+    this.addressService.addAddress(address);
+    res.customerSend('添加地址成功', HttpStatus.OK, {});
+  }
+}
