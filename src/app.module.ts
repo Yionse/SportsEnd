@@ -6,7 +6,6 @@ import { Cart } from './entities/Carts.entities';
 import { OneCategory } from './entities/OneCategory.entities';
 import { Order } from './entities/Orders.entities';
 import { Product } from './entities/Products.entities';
-import { ProductsComment } from './entities/ProductsComment.entities';
 import { Property } from './entities/Property.entities';
 import { TwoCategory } from './entities/TwoCategory.entities';
 import { User } from './entities/Users.entities';
@@ -23,6 +22,8 @@ import { AddressController } from './controllers/address.controller';
 import { AddressService } from './services/address.service';
 import { OrderController } from './controllers/orders.controller';
 import { OrderService } from './services/order.service';
+import { ProductComment } from './entities/ProductComment.entities';
+import { ProductCommentService } from './services/productComment.service';
 
 dotenv.config();
 @Module({
@@ -40,10 +41,10 @@ dotenv.config();
         OneCategory,
         Order,
         Product,
-        ProductsComment,
         Property,
         TwoCategory,
         User,
+        ProductComment,
       ],
     }),
     TypeOrmModule.forFeature([
@@ -52,10 +53,10 @@ dotenv.config();
       OneCategory,
       Order,
       Product,
-      ProductsComment,
       Property,
       TwoCategory,
       User,
+      ProductComment,
     ]),
   ],
   controllers: [
@@ -74,6 +75,7 @@ dotenv.config();
     CartService,
     AddressService,
     OrderService,
+    ProductCommentService,
   ],
 })
 export class AppModule {

@@ -1,7 +1,7 @@
 import { Product } from '@/entities/Products.entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { CategoryService } from './category.service';
 import { PropertyService } from './property.service';
 
@@ -120,5 +120,11 @@ export class ProductService {
 
   async getIdProduct(id: number) {
     return this.productRepository.findOne({ where: { productID: id } });
+  }
+
+  async search(key: string) {
+    return this.productRepository.find({
+      where: { productName: Like(`%${key}%`) },
+    });
   }
 }

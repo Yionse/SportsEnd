@@ -35,4 +35,8 @@ export class UserServices {
       },
     });
   }
+
+  async getUserList(userId?: number) {
+    return await this.userRepository.find({ where: { userid: userId } });
+  }
 }
