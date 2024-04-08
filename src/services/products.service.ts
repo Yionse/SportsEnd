@@ -18,18 +18,21 @@ export class ProductService {
     private readonly propertyService: PropertyService,
   ) {}
 
+  // 获取一级分类下的商品
   async getOneCategoryGoods(oneCategory?: number) {
     return await this.productRepository.find({
       where: { oneCategoryId: oneCategory },
     });
   }
 
+  // 获取二级分类下的商品
   async getTwoCategoryGoods(twoCategory?: number) {
     return await this.productRepository.find({
       where: { twoCategoryId: twoCategory },
     });
   }
 
+  // 获取随机的一些商品
   async getNewProduct() {
     const products = await this.getOneCategoryGoods();
     const arr: Product[] = [];
@@ -47,6 +50,7 @@ export class ProductService {
     });
   }
 
+  // 获取首页轮播图数据
   async getProductList() {
     const arr: { name: string; children: Product[] }[] = [];
     const oneCategoryList = await this.categoryService.oneCategory();
@@ -77,6 +81,7 @@ export class ProductService {
     });
   }
 
+  // 获取商品详情
   async getDetailData(id: number) {
     let obj: {
       categories: {
@@ -118,10 +123,16 @@ export class ProductService {
     return obj;
   }
 
+  /**
+   * 按照ID获取当前商品
+   * @param id 商品ID
+   * @returns 返回整个商品谁
+   */
   async getIdProduct(id: number) {
     return this.productRepository.findOne({ where: { productID: id } });
   }
 
+  // 搜索
   async search(key: string) {
     return this.productRepository.find({
       where: { productName: Like(`%${key}%`) },

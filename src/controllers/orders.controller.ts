@@ -42,6 +42,7 @@ export class OrderController {
       .map((item) => {
         return {
           ...item,
+          // 当地址删除后，可能出现找不到
           address: addressList.find(
             (address) => address.addressID === item.addressID,
           ),

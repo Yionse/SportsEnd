@@ -9,11 +9,17 @@ import {
   Query,
   Res,
 } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Response } from 'express';
+import { Repository } from 'typeorm';
 
 @Controller('/address')
 export class AddressController {
-  constructor(private readonly addressService: AddressService) {}
+  constructor(
+    private readonly addressService: AddressService,
+    @InjectRepository(Address)
+    private readonly appRepository: Repository<Address>,
+  ) {}
 
   @Get('/list')
   async getAddressList(
@@ -31,5 +37,14 @@ export class AddressController {
   async addAddress(@Body() address: Address, @Res() res: Response) {
     this.addressService.addAddress(address);
     res.customerSend('添加地址成功', HttpStatus.OK, {});
+  }
+
+  @Get('/delete')
+  async deleteAddress(
+    @Query() { addressId }: { addressId: number },
+    @Res() res: Response,
+  ) {
+    await this.appRepository.delete(addressId);
+    res.customerSend('删除地址成功', HttpStatus.OK, {});
   }
 }

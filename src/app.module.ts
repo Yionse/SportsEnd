@@ -25,6 +25,10 @@ import { OrderService } from './services/order.service';
 import { ProductComment } from './entities/ProductComment.entities';
 import { ProductCommentService } from './services/productComment.service';
 
+// 管理端
+import { MProduct } from './BackManagement/controllers/MProduct';
+import { MProductService } from './BackManagement/services/MProduct.service';
+
 dotenv.config();
 @Module({
   imports: [
@@ -65,6 +69,8 @@ dotenv.config();
     ProductController,
     AddressController,
     OrderController,
+    // 管理端
+    MProduct,
   ],
   providers: [
     UserServices,
@@ -76,6 +82,8 @@ dotenv.config();
     AddressService,
     OrderService,
     ProductCommentService,
+    // 管理端
+    MProductService,
   ],
 })
 export class AppModule {
