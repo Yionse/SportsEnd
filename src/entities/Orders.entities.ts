@@ -13,7 +13,8 @@ export class Order {
   @Column({
     type: 'tinyint',
     nullable: false,
-    comment: '1-支付成功 -1退款中 -2退款成功 -3换货',
+    comment:
+      '1-支付成功 -1退款中 -2退款成功 -3换货 -4退款失败 -5换货成功 -6换货失败',
   })
   status: number;
 

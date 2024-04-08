@@ -26,8 +26,12 @@ import { ProductComment } from './entities/ProductComment.entities';
 import { ProductCommentService } from './services/productComment.service';
 
 // 管理端
-import { MProduct } from './BackManagement/controllers/MProduct';
+import { MProductController } from './BackManagement/controllers/MProduct';
 import { MProductService } from './BackManagement/services/MProduct.service';
+import { MPropertyController } from './BackManagement/controllers/MProperty';
+import { MPropertyService } from './BackManagement/services/MProperty.service';
+import { MOrderController } from './BackManagement/controllers/MOrder';
+import { MOrderService } from './BackManagement/services/MOrder.service';
 
 dotenv.config();
 @Module({
@@ -70,7 +74,9 @@ dotenv.config();
     AddressController,
     OrderController,
     // 管理端
-    MProduct,
+    MProductController,
+    MPropertyController,
+    MOrderController,
   ],
   providers: [
     UserServices,
@@ -84,6 +90,8 @@ dotenv.config();
     ProductCommentService,
     // 管理端
     MProductService,
+    MPropertyService,
+    MOrderService,
   ],
 })
 export class AppModule {

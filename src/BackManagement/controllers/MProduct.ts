@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 
 // 商品管理
 @Controller('/MProduct')
-export class MProduct {
+export class MProductController {
   constructor(
     private readonly mProductService: MProductService,
     @InjectRepository(Product)
