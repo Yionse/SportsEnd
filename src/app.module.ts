@@ -32,6 +32,8 @@ import { MPropertyController } from './BackManagement/controllers/MProperty';
 import { MPropertyService } from './BackManagement/services/MProperty.service';
 import { MOrderController } from './BackManagement/controllers/MOrder';
 import { MOrderService } from './BackManagement/services/MOrder.service';
+import { MCommentController } from './BackManagement/controllers/MComment';
+import { MCommentService } from './BackManagement/services/MComment.service';
 
 dotenv.config();
 @Module({
@@ -77,6 +79,7 @@ dotenv.config();
     MProductController,
     MPropertyController,
     MOrderController,
+    MCommentController,
   ],
   providers: [
     UserServices,
@@ -92,6 +95,7 @@ dotenv.config();
     MProductService,
     MPropertyService,
     MOrderService,
+    MCommentService,
   ],
 })
 export class AppModule {
