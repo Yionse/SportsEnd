@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Like, Repository } from 'typeorm';
 import { CategoryService } from './category.service';
 import { PropertyService } from './property.service';
+import { ProductCommentService } from './productComment.service';
 
 function getRadom(max: number) {
   return Math.floor(Math.random() * (max + 1));
@@ -16,6 +17,7 @@ export class ProductService {
     private readonly productRepository: Repository<Product>,
     private readonly categoryService: CategoryService,
     private readonly propertyService: PropertyService,
+    private readonly productComment: ProductCommentService,
   ) {}
 
   // 获取一级分类下的商品
@@ -97,6 +99,7 @@ export class ProductService {
         list: string[];
       }[];
     } & Product = {} as any;
+    const comment = await this.productComment.getList(id);
     const currentProduct = await this.getIdProduct(id);
     obj.categories = await this.categoryService.getTwoOneCategory(
       currentProduct.twoCategoryId,
@@ -120,6 +123,7 @@ export class ProductService {
       });
     });
     obj.skuList = skuList;
+    obj['comment'] = comment;
     return obj;
   }
 
