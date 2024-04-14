@@ -1,3 +1,4 @@
+import { Address } from '@/entities/Address.entities';
 import { Order } from '@/entities/Orders.entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -8,6 +9,8 @@ export class MOrderService {
   constructor(
     @InjectRepository(Order)
     private readonly orderRepository: Repository<Order>,
+    @InjectRepository(Address)
+    private readonly addressRepository: Repository<Address>,
   ) {}
 
   async getList(status: string) {
@@ -17,7 +20,14 @@ export class MOrderService {
         status,
       };
     }
-    return await this.orderRepository.find({ where: query });
+    const data = await this.orderRepository.find({ where: query });
+    const addressList = await this.addressRepository.find();
+    return data.map((order) => {
+      return {
+        ...order,
+        address: addressList.find((item) => item.addressID === order.addressID),
+      };
+    });
   }
 
   async updateOrderStatus(orderId: number, status: string) {

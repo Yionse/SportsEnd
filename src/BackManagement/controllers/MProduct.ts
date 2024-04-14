@@ -1,4 +1,13 @@
-import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  Post,
+  Query,
+  Res,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { MProductService } from '../services/MProduct.service';
 import { Product } from '@/entities/Products.entities';
@@ -36,5 +45,17 @@ export class MProductController {
   async addProduct(@Body() product: Product, @Res() res: Response) {
     await this.productRepository.save(product);
     res.customerSend('添加商品成功', HttpStatus.OK, {});
+  }
+
+  // 删除商品
+  @Post('/delete')
+  async deleteProduct(
+    @Body() { productID }: { productID: number },
+    @Res() res: Response,
+  ) {
+    console.log(productID);
+
+    await this.productRepository.delete(productID);
+    res.customerSend('删除商品成功', HttpStatus.OK, {});
   }
 }

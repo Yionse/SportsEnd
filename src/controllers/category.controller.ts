@@ -1,3 +1,5 @@
+import { OneCategory } from '@/entities/OneCategory.entities';
+import { TwoCategory } from '@/entities/TwoCategory.entities';
 import { CategoryService } from '@/services/category.service';
 import { ProductService } from '@/services/products.service';
 import {
@@ -10,13 +12,19 @@ import {
   Query,
   Res,
 } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Response } from 'express';
+import { Repository } from 'typeorm';
 
 @Controller('/category')
 export class CateGoryController {
   constructor(
     private readonly categoryService: CategoryService,
     private readonly productService: ProductService,
+    @InjectRepository(OneCategory)
+    private readonly oneRepository: Repository<OneCategory>,
+    @InjectRepository(TwoCategory)
+    private readonly twoRepository: Repository<OneCategory>,
   ) {}
 
   @Get('/oneCategory')
@@ -116,5 +124,13 @@ export class CateGoryController {
         },
       ),
     );
+  }
+
+  @Get('/list')
+  async getList(@Res() res: Response) {
+    res.customerSend('获取分类成功', HttpStatus.OK, {
+      one: await this.oneRepository.find(),
+      two: await this.twoRepository.find(),
+    });
   }
 }

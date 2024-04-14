@@ -28,7 +28,7 @@ export class Product {
   @Column({ nullable: false, comment: '二级分类' })
   twoCategoryId: number;
 
-  @Column({ length: 200, nullable: false, default: '' })
+  @Column({ length: 400, nullable: false, default: '' })
   url: string;
 
   @Column({ length: 30, nullable: false, default: '', comment: '属性列表' })

@@ -34,6 +34,8 @@ import { MOrderController } from './BackManagement/controllers/MOrder';
 import { MOrderService } from './BackManagement/services/MOrder.service';
 import { MCommentController } from './BackManagement/controllers/MComment';
 import { MCommentService } from './BackManagement/services/MComment.service';
+import { AdminUser } from './entities/Admin.entities';
+import { AdminController } from './BackManagement/controllers/MUser';
 
 dotenv.config();
 @Module({
@@ -55,6 +57,7 @@ dotenv.config();
         TwoCategory,
         User,
         ProductComment,
+        AdminUser,
       ],
     }),
     TypeOrmModule.forFeature([
@@ -67,6 +70,7 @@ dotenv.config();
       TwoCategory,
       User,
       ProductComment,
+      AdminUser,
     ]),
   ],
   controllers: [
@@ -80,6 +84,7 @@ dotenv.config();
     MPropertyController,
     MOrderController,
     MCommentController,
+    AdminController,
   ],
   providers: [
     UserServices,
