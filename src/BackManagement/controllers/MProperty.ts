@@ -31,4 +31,13 @@ export class MPropertyController {
     await this.propertyRepository.save(property);
     res.customerSend('修改属性成功', HttpStatus.OK, {});
   }
+
+  @Post('delete')
+  async deleteProperty(
+    @Body() { propertyId }: { propertyId: number },
+    @Res() res: Response,
+  ) {
+    await this.propertyRepository.delete(propertyId);
+    res.customerSend('删除属性成功', HttpStatus.OK, {});
+  }
 }

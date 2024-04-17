@@ -18,11 +18,13 @@ export class MCommentService {
     const products = await this.productService.getOneCategoryGoods();
     const users = await this.userService.getUserList();
     const comments = await this.appRepository.find();
+    console.log(comments);
+    console.log(users);
 
     comments.forEach((comment) => {
-      comment['user'] = users.find(
-        (user) => user.userid === comment.userId,
-      ).userName;
+      comment['user'] =
+        users.find((user) => user.userid === comment.userId)?.userName ||
+        '已注销';
       const { productName, url } = products.find(
         (product) => product.productID === comment.productId,
       );

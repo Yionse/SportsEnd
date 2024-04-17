@@ -19,7 +19,7 @@ export class ProductCommentService {
       const currentUser = userList.find(
         (user) => user.userid === comment.userId,
       );
-      comment['userName'] = currentUser.userName;
+      comment['userName'] = currentUser?.userName || '已注销';
     });
     return commentList;
   }

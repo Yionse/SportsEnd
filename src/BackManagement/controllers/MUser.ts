@@ -49,4 +49,13 @@ export class AdminController {
       userList,
     });
   }
+
+  @Post('delete')
+  async deleteAdmin(
+    @Body() { admin }: { admin: string },
+    @Res() res: Response,
+  ) {
+    await this.adminRepository.delete(admin);
+    res.customerSend('删除管理员成功', HttpStatus.OK, {});
+  }
 }
